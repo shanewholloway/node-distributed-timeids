@@ -4,7 +4,8 @@ var z6 = '000000'
 var z24 = z6+z6+z6+z6
 
 module.exports = exports = timeIds
-function timeIds(opt={}) {
+function timeIds(opt) {
+  if (opt==null) opt = {}
   var bodyId = opt.bodyId || ''
   var sep = opt.sep != null ? opt.sep : '-'
   {
@@ -25,11 +26,11 @@ function timeIds(opt={}) {
   }
 
   var td_next = timeDivisions(opt)
-  var fmt_id = opt.fmt_id || function (tdiv, bodyId) {
+  var fmt_id = opt.fmt_id || function(tdiv, bodyId) {
     return [tdiv.sz_div, bodyId, tdiv.sz_c].join(sep) }
 
   if (opt.update)
-    return function () {
+    return function() {
       var tdiv = td_next()
       if (0 === tdiv.c)
         bodyId = opt.update(bodyId, tdiv) || bodyId
@@ -41,7 +42,8 @@ function timeIds(opt={}) {
 
 
 timeIds.randomBodyId = randomBodyId
-function randomBodyId(opt={}) {
+function randomBodyId(opt) {
+  if (opt==null) opt = {}
   var digits = opt.digits || 4, radix = opt.radix || 36
   var rVal = Math.random() * Math.pow(radix, digits)
   var pad_zeros = _curryPadNumber(radix, z24.slice(0, digits))
@@ -51,13 +53,14 @@ function randomBodyId(opt={}) {
 
 timeIds.ts_base = new Date('2015-01-01T00:00:00').valueOf()
 timeIds.timeDivisions = timeDivisions
-function timeDivisions(opt={}) {
+function timeDivisions(opt) {
+  if (opt==null) opt = {}
   var ts0 = opt.ts_base || timeIds.ts_base
   var fmt_ts = _curryPadNumber(opt.radix || 36, opt.pad_ts || z6)
   var fmt_c  = _curryPadNumber(opt.radix || 36, opt.pad_c  || z6)
   var duration = opt.duration || 60*1000
 
-  var ts_div = function (ts) {
+  var ts_div = function(ts) {
     var div = Math.floor((ts - ts0) / duration)
     var t0 = div * duration + ts0
     var t1 = t0 + duration
@@ -80,7 +83,7 @@ function timeDivisions(opt={}) {
 timeIds._curryPadNumber = _curryPadNumber
 function _curryPadNumber(radix, pad) {
   var pre=pad+"", len=pre.length
-  return function (v) {
+  return function(v) {
     var sz = v.toString(radix)
     return (sz.length >= len) ? sz
       : (pre+sz).substr(-len) }
