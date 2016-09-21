@@ -66,15 +66,24 @@ function timeDivisions(opt) {
     var t1 = t0 + duration
     return {t0, t1, div, sz_div: fmt_ts(div)} }
 
-  var tip = {}
+  var tip = {}, sz_c0
   return function() {
     var now = Date.now()
+    // first pass: tip.t1 is undefined, and (undefined <= now number) evaluates **false**
     if (tip.t1 > now) {
-      tip.sz_c = fmt_c(++tip.c)
-    } else {
-      tip = ts_div(now)
-      tip.sz_c = fmt_c(tip.c = 0)
+      var c=tip.c+1, sz_c=fmt_c(c)
+      // throw if sz_c has rolled over
+      if (sz_c === sz_c0)
+        throw new Error("Timeid rollover", {sz_c, sz_c0, c, tip})
+
+      tip.c = c; tip.sz_c = sz_c
+      return tip
     }
+    // otherwise, refresh
+
+    tip = ts_div(now)
+    sz_c0 = fmt_c(tip.c = 0)
+    tip.sz_c = sz_c0
     return tip
   }
 }
@@ -85,7 +94,6 @@ function _curryPadNumber(radix, pad) {
   var pre=pad+"", len=pre.length
   return function(v) {
     var sz = v.toString(radix)
-    return (sz.length >= len) ? sz
-      : (pre+sz).substr(-len) }
+    return (pre+sz).substr(-len) }
 }
 
