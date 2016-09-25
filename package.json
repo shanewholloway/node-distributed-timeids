@@ -1,13 +1,10 @@
 {
   "name": "distributed-timeids",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Distributed time id generation, loosely inspired by Twitter Snowflake",
   "homepage": "https://github.com/shanewholloway/node-distributed-timeids",
   "bugs": "https://github.com/shanewholloway/node-distributed-timeids/issues",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/shanewholloway/node-distributed-timeids.git"
-  },
+  "repository": "shanewholloway/node-distributed-timeids",
   "author": "Shane Holloway <shane.holloway@ieee.org>",
   "license": "ISC",
   "main": "timeids.js",
@@ -17,6 +14,8 @@
   "scripts": {
     "start": "npm -s run test -- --watch",
     "watch": "npm -s run test -- --watch",
+    "prepublish": "npm -s run test",
+    "preversion": "npm -s run test",
     "test": "ava test"
   }
 }
