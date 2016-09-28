@@ -64,7 +64,7 @@ function timeDivisions(opt) {
     var div = Math.floor((ts - ts0) / duration)
     var t0 = div * duration + ts0
     var t1 = t0 + duration
-    return {t0, t1, div, sz_div: fmt_ts(div)} }
+    return {t0: t0, t1: t1, div: div, sz_div: fmt_ts(div)} }
 
   var tip = {}, sz_c0
   return function() {
@@ -74,7 +74,7 @@ function timeDivisions(opt) {
       var c=tip.c+1, sz_c=fmt_c(c)
       // throw if sz_c has rolled over
       if (sz_c === sz_c0)
-        throw new Error("Timeid rollover", {sz_c, sz_c0, c, tip})
+        throw new Error("Timeid rollover", {sz_c:sz_c, sz_c0:sz_c0, c:c, tip:tip})
 
       tip.c = c; tip.sz_c = sz_c
       return tip
