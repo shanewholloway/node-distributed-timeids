@@ -1,6 +1,6 @@
 {
   "name": "distributed-timeids",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "description": "Distributed time id generation, loosely inspired by Twitter Snowflake",
   "homepage": "https://github.com/shanewholloway/node-distributed-timeids",
   "bugs": "https://github.com/shanewholloway/node-distributed-timeids/issues",
@@ -10,7 +10,7 @@
   "main": "timeids.js",
   "browser": "timeids.min.js",
   "devDependencies": {
-    "ava": "^0.16.0",
+    "tap-lite-tester": "^0.3.3",
     "uglify-js": "^2.7.3"
   },
   "scripts": {
@@ -19,6 +19,6 @@
     "build": "uglifyjs --screw-ie8 --mangle --compress -o timeids.min.js timeids.js ",
     "prepublish": "npm -s run build && npm -s run test",
     "preversion": "npm -s run build && npm -s run test",
-    "test": "ava test"
+    "test": "tap-lite-runner test/test*.js"
   }
 }
