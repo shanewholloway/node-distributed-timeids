@@ -51,7 +51,7 @@ function randomBodyId(opt) {
 }
 
 
-timeIds.ts_base = new Date('2015-01-01T00:00:00').valueOf()
+timeIds.ts_base = new Date('2015-01-01T00:00:00.000Z').valueOf()
 timeIds.timeDivisions = timeDivisions
 function timeDivisions(opt) {
   if (opt==null) opt = {}

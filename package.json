@@ -1,6 +1,6 @@
 {
   "name": "distributed-timeids",
-  "version": "0.8.4",
+  "version": "0.9.0",
   "description": "Distributed time id generation, loosely inspired by Twitter Snowflake",
   "homepage": "https://github.com/shanewholloway/node-distributed-timeids",
   "bugs": "https://github.com/shanewholloway/node-distributed-timeids/issues",
