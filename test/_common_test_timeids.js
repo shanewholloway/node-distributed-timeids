@@ -1,4 +1,5 @@
 import tap from 'tap-lite-tester'
+import {main as example_main} from '../example.js'
 
 export default test_timeids_module
 export function test_timeids_module(timeids) {
@@ -8,8 +9,7 @@ export function test_timeids_module(timeids) {
   tap.test.cb('example', t => {
     const mock = {log: obj => obj && t.ok(true) }
     t.plan(4 * 2)
-    require('../example.js')
-      .main(mock, t.done)
+    example_main(mock, t.done)
   })
 
   tap.test('full', t => {

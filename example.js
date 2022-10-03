@@ -1,6 +1,6 @@
 import timeids from 'distributed-timeids'
 
-function main(console, done) {
+export function main(console, done) {
   let duration = 100 // 60*1000
 
   let nextTimeId = timeids({template: "0000000-anExample-000", duration})
@@ -26,4 +26,6 @@ function main(console, done) {
     }, duration+1)
 }
 
-main(console)
+if (import.meta.url == `file://${process.argv[1]}`)
+  main(console)
+
