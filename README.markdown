@@ -16,10 +16,9 @@ $ npm install distributed-timeids
 ### Example
 
 ```javascript
-let duration = 60*1000
+import timeids from 'distributed-timeids'
 
-const timeids = require('distributed-timeids')
-let nextTimeId = timeids({template: "0000000-anExample-000", duration})
+let nextTimeId = timeids({template: "0000000-anExample-000", duration: 60*1000})
 let nextTimeId_R = timeids()
 
 console.log()
@@ -36,7 +35,7 @@ setTimeout(() => {
     console.log(nextTimeId())
     console.log(nextTimeId_R())
     console.log()
-  }, duration+1)
+  }, 61000)
 
 ```
 
