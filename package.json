@@ -1,24 +1,35 @@
 {
   "name": "distributed-timeids",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Distributed time id generation, loosely inspired by Twitter Snowflake",
   "homepage": "https://github.com/shanewholloway/node-distributed-timeids",
   "bugs": "https://github.com/shanewholloway/node-distributed-timeids/issues",
   "repository": "shanewholloway/node-distributed-timeids",
   "author": "Shane Holloway <shane.holloway@ieee.org>",
   "license": "ISC",
-  "main": "timeids.js",
-  "browser": "timeids.min.js",
+  "main": "esm/timeids.js",
+  "browser": "esm/timeids.min.js",
+  "type": "module",
+  "exports": {
+    "./esm/*": "./esm/*",
+    ".": "./esm/timeids.js"
+  },
+  "dependencies": {},
   "devDependencies": {
-    "tap-lite-tester": "^0.3.3",
-    "uglify-js": "^2.7.3"
+    "rollup": "^2.79.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "tap-lite-tester": "^0.3.3"
   },
   "scripts": {
-    "start": "npm -s run test -- --watch",
-    "watch": "npm -s run test -- --watch",
-    "build": "uglifyjs --screw-ie8 --mangle --compress -o timeids.min.js timeids.js ",
-    "prepublish": "npm -s run build && npm -s run test",
-    "preversion": "npm -s run build && npm -s run test",
-    "test": "tap-lite-runner test/test*.js"
+    "prebuild": "test -d ./node_modules || npm ci",
+    "build": "rollup --config",
+    "watch": "rollup --config --watch",
+
+    "prepublishOnly": "npm -s run test",
+    "preversion": "npm -s run test",
+    "pretest": "npm -s run build",
+    "test": "npm -s run test:only",
+    "test:watch": "tap-lite-runner --watch test/test*.js",
+    "test:only": "tap-lite-runner test/test*.js"
   }
 }

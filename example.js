@@ -1,6 +1,4 @@
-'use strict'
-
-const timeids = require('./timeids')
+import timeids from 'distributed-timeids'
 
 function main(console, done) {
   let duration = 100 // 60*1000
@@ -28,8 +26,4 @@ function main(console, done) {
     }, duration+1)
 }
 
-Object.assign(exports, {main})
-
-if (module === require.main)
-  main(console)
-
+main(console)

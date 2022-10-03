@@ -1,6 +1,7 @@
-'use strict'
-module.exports = exports = function test_timeids_module(timeids) {
-  const tap = require('tap-lite-tester')
+import tap from 'tap-lite-tester'
+
+export default test_timeids_module
+export function test_timeids_module(timeids) {
 
   tap.test('smoke', t => t.ok(timeids))
 
@@ -69,4 +70,5 @@ module.exports = exports = function test_timeids_module(timeids) {
 
   })
 
-  return tap.finish() }
+  return tap.finish()
+}
